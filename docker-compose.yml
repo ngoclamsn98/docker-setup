@@ -1,0 +1,44 @@
+version: '3'
+# mỗi services nó sẽ tạo ra 1 container
+services:
+  # đặt tên ntn cũng được
+  course-service:
+  # đặt tên container thế nào cũng được 
+    container_name: test-docker
+  # nó sẽ trỏ về folder chứa docker file
+    build: ./ 
+  # nó sẽ update server realtime , nó sẽ update vào thẳng container 
+    volumes:
+      - ./:/usr/src/app
+  # sau khi change code thì nó chạy lại
+    command: npm start
+    ports:
+      - 8080:8080
+    networks:
+      - common
+    environment:
+      PORT: 8080
+      MONGO_URL: 'mongodb://mongo/example'
+      NODE_ENV: 'development'
+  
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/data/db
+    networks:
+      - common
+
+# khi làm việc nhiều container có thể chỉ định 1 network để chúng có thể giao tiếp với nhau
+networks:
+  common:
+
+
+
+
+
+
+# cách để chạy: docker-compose up
+# cách để tắt: docker-compose down
