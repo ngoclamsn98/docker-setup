@@ -1,0 +1,14 @@
+dừng chạy docker
+sudo docker-compose down
+chạy docker
+sudo docker-compose up --build -d
+xóa image
+sudo docker rmi id_image
+hiển thị tất cả image
+sudo docker images -a
+hiển thị tất cả các images có tên mongo
+sudo docker images -a | grep mongo
+hiển thị service đang chạy
+sudo docker ps -a | grep 8000
+hiển thị log đang chạy
+sudo docker logs -f --tail 1000 id
